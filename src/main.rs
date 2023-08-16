@@ -37,7 +37,6 @@ impl<T: Clone + std::fmt::Debug> RingBuffer<T> {
 
 
 fn main() {
-    println!("Hello, world!");
     let mut my_buff = RingBuffer::<i32>::new(10);
     for i in 1..12 {
         my_buff.push(i);
