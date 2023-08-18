@@ -30,11 +30,10 @@ pub mod ringbuffer {
 
         fn next_head_pos(&self, pos_now: usize) -> usize {
             (pos_now + 1) % self.buffer_size
-        } 
+        }
 
         pub fn print(&self) {
             println!("{:?}", self.buffer);
         }
     }
-
 }
