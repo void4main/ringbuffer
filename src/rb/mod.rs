@@ -1,5 +1,12 @@
 pub mod ringbuffer {
 
+    pub enum RingBufferError {
+        BufferFull,
+        BufferEmpty,
+    }
+
+    pub type RingBufferResult<T> = Result<T, RingBufferError>;
+
     pub struct RingBuffer<T> {
         buffer: Vec<Option<T>>,
         read_head: usize,
@@ -17,9 +24,10 @@ pub mod ringbuffer {
             }
         }
 
-        pub fn push(&mut self, element: T) {
+        pub fn push(&mut self, element: T) -> RingBufferResult<T> {
             self.write_head = self.next_head_pos(self.write_head);
             self.buffer[self.write_head] = Some(element);
+            Ok(self.buffer[self.write_head].clone().unwrap())
         }
 
         pub fn pull(&mut self) -> Option<T> {
